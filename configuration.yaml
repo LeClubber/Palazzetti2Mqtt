@@ -1,0 +1,51 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+mqtt:
+  broker: mqtt
+  discovery: true
+  discovery_prefix: palazzetti
+
+climate:
+  - platform: mqtt
+    name: Palazzetti
+    unique_id: palazzetti
+    modes:
+      - "off"
+      - "heat"
+    hold_modes:
+      - "1"
+      - "2"
+      - "3"
+      - "4"
+      - "5"
+    fan_modes:
+      - "Off"
+      - "1"
+      - "2"
+      - "3"
+      - "4"
+      - "5"
+      - "High"
+      - "Auto"
+    mode_command_topic: "palazzetti/mode/set"
+    mode_state_topic: "palazzetti/mode/state"
+    hold_command_topic: "palazzetti/hold/set"
+    hold_state_topic: "palazzetti/hold/state"
+    temperature_command_topic: "palazzetti/temperature/set"
+    temperature_state_topic: "palazzetti/temperature/state"
+    current_temperature_topic: "palazzetti/temperature/current"
+    fan_mode_command_topic: "palazzetti/fan/set"
+    fan_mode_state_topic: "palazzetti/fan/state"
+    action_topic: "palazzetti/action/state"
+    max_temp: 28
+    min_temp: 18

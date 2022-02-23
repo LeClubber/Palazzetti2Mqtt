@@ -1,0 +1,37 @@
+version: '3'
+services:
+  homeassistant:
+    container_name: homeassistant
+    image: homeassistant/home-assistant:stable
+    privileged: true
+    restart: always
+    volumes:
+      - ./homeassistant:/config
+    environment:
+      - TZ=Europe/Paris
+    # network_mode: host
+    ports:
+      - 8123:8123
+
+  mqtt:
+    container_name: mqtt
+    image: eclipse-mosquitto
+    restart: always
+    ports:
+      - 1883:1883
+    volumes:
+      - ./mqtt/mosquitto-no-auth.conf:/mosquitto/config/mosquitto.conf
+  
+  palazzetti:
+    container_name: palazzetti
+    # image: leclubber/Palazzetti2Mqtt
+    build: ./palazzetti
+    privileged: true
+    restart: always
+    environment:
+      - MQTT_PORT=1883
+      - MQTT_HOST=mqtt
+      - MQTT_TOPIC=palazzetti
+      - PALAZZETTI_HOST=192.168.1.1
+      - PALAZZETTI_PULL_STATUS=5
+
