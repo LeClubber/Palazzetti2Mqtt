@@ -1,6 +1,5 @@
 .DS_Store
 .vscode
 homeassistant
-mqtt
 test.py
 __pycache__
