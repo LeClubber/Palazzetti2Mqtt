@@ -30,7 +30,7 @@ services:
     environment:
       - MQTT_PORT=1883
       - MQTT_HOST=mqtt
-      - MQTT_TOPIC=palazzetti
+      - MQTT_TOPIC=homeassistant
       - PALAZZETTI_HOST=192.168.1.1
       - PALAZZETTI_PULL_STATUS=5
 
