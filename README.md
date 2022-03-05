@@ -41,7 +41,7 @@ services:
     environment:
       - MQTT_PORT=1883
       - MQTT_HOST=mqtt
-      - MQTT_TOPIC=palazzetti
+      - MQTT_TOPIC=homeassistant
       - PALAZZETTI_HOST=192.168.1.21
       - PALAZZETTI_PULL_STATUS=5
 ```
@@ -50,7 +50,7 @@ Les variables d'environnement sont optionnelles, elles possèdent une valeur par
 
 - MQTT_PORT (1883 par défaut)
 - MQTT_HOST (mqtt par défaut)
-- MQTT_TOPIC (palazzetti par défaut)
+- MQTT_TOPIC (homeassistant par défaut)
 - PALAZZETTI_HOST (192.168.1.1 par défaut)
 - PALAZZETTI_PULL_STATUS (5s par défaut)
 
@@ -83,7 +83,9 @@ chmod +x *.py
 
 ## Configuration de Home-Assistant
 
-Le poêle dans Home-Assistant se déclare via le fichier de configuration [configuration.yaml](configuration.yaml). Il faut ajouter un module "climate" de cette fçon :
+Le poêle dans Home-Assistant fonctionne avec le discovery de MQTT. Il suffit de s'abonner dans Home-Assistant au canal souhaité ("homeassistant" par défaut).
+
+On peut également le déclarer via le fichier de configuration [configuration.yaml](configuration.yaml). Il faut ajouter un module "climate" de cette fçon :
 ``` yaml
 climate:
   - platform: mqtt
@@ -107,16 +109,22 @@ climate:
       - "5"
       - "High"
       - "Auto"
-    mode_command_topic: "palazzetti/mode/set"
-    mode_state_topic: "palazzetti/mode/state"
-    hold_command_topic: "palazzetti/hold/set"
-    hold_state_topic: "palazzetti/hold/state"
-    temperature_command_topic: "palazzetti/temperature/set"
-    temperature_state_topic: "palazzetti/temperature/state"
-    current_temperature_topic: "palazzetti/temperature/current"
-    fan_mode_command_topic: "palazzetti/fan/set"
-    fan_mode_state_topic: "palazzetti/fan/state"
-    action_topic: "palazzetti/action/state"
+    mode_command_topic: "homeassistant/climate/palazzetti/modeCmd"
+    mode_state_topic: "homeassistant/climate/palazzetti/state"
+    mode_state_template: "{{ value_json.mode}}"
+    hold_command_topic: "homeassistant/hold/set"
+    hold_state_topic: "homeassistant/climate/palazzetti/state"
+    hold_state_topic: "{{ value_json.hold}}"
+    temperature_command_topic: "homeassistant/temperature/set"
+    temperature_state_topic: "homeassistant/climate/palazzetti/state"
+    temperature_state_template: "{{ value_json.target_temp}}"
+    current_temperature_topic: "homeassistant/climate/palazzetti/state"
+    current_temperature_template: "{{ value_json.current_temp}}"
+    fan_mode_command_topic: "homeassistant/fan/set"
+    fan_mode_state_topic: "homeassistant/climate/palazzetti/state"
+    fan_mode_state_template: "{{ value_json.fan_mode}}"
+    action_topic: "homeassistant/climate/palazzetti/state"
+    action_template: "{{ value_json.action}}"
     max_temp: 28
     min_temp: 18
 ```
@@ -134,6 +142,7 @@ Vous pourrez alors :
 - [x] Initialisation des config dans MQTT
 - [x] Documentation
 - [x] Publier image Docker en multiple arch
+- [ ] Changer la commande "hold" qui est dépréciée
 - [ ] Attente du serveur MQTT si non disponible
 - [ ] Tester les paramètres et gestion d'erreur
 - [ ] Utilisation d'un login/mot de passe pour le broker MQTT
