@@ -85,7 +85,7 @@ chmod +x *.py
 
 Le poêle dans Home-Assistant fonctionne avec le discovery de MQTT. Il suffit de s'abonner dans Home-Assistant au canal souhaité ("homeassistant" par défaut).
 
-On peut également le déclarer via le fichier de configuration [configuration.yaml](configuration.yaml). Il faut ajouter un module "climate" de cette fçon :
+**Optionnel :** On peut également le déclarer via le fichier de configuration [configuration.yaml](configuration.yaml). Il faut ajouter un module "climate" de cette fçon :
 ``` yaml
 climate:
   - platform: mqtt
@@ -142,6 +142,7 @@ Vous pourrez alors :
 - [x] Initialisation des config dans MQTT
 - [x] Documentation
 - [x] Publier image Docker en multiple arch
+- [x] Discovery MQTT
 - [ ] Changer la commande "hold" qui est dépréciée
 - [ ] Attente du serveur MQTT si non disponible
 - [ ] Tester les paramètres et gestion d'erreur
