@@ -24,8 +24,7 @@ services:
   
   palazzetti:
     container_name: palazzetti
-    # image: leclubber/Palazzetti2Mqtt
-    build: ./palazzetti
+    image: leclubber/palazzetti2mqtt
     privileged: true
     restart: always
     environment:
