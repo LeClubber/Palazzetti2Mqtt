@@ -51,6 +51,8 @@ Les variables d'environnement sont optionnelles, elles possèdent une valeur par
 - MQTT_PORT (1883 par défaut)
 - MQTT_HOST (mqtt par défaut)
 - MQTT_TOPIC (homeassistant par défaut)
+- MQTT_USER (vide par défaut)
+- MQTT_PASSWORD (vide par défaut)
 - PALAZZETTI_HOST (192.168.1.1 par défaut)
 - PALAZZETTI_PULL_STATUS (5s par défaut)
 
@@ -151,3 +153,4 @@ Vous pourrez alors :
 - [x] Utilisation d'un login/mot de passe pour le broker MQTT
 - [ ] Attente du serveur MQTT si non disponible
 - [ ] Tester les paramètres et gestion d'erreur
+- [ ] Utilisation de certificat pour le broker MQTT
