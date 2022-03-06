@@ -70,6 +70,8 @@ class Mqtt2Palazzetti(Thread):
     def run(self):
         """ Démarrage du service MQTT """
         client = mqtt.Client()
+        if Constantes.mqttUser:
+            client.username_pw_set(Constantes.mqttUser, Constantes.mqttPassword)
         client.on_connect = self.on_connect
         client.on_message = self.on_message
         client.connect(Constantes.mqttHost, Constantes.mqttPort, 60)

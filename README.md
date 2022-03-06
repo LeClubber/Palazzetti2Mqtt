@@ -148,6 +148,6 @@ Vous pourrez alors :
 - [x] Publier image Docker en multiple arch
 - [x] Discovery MQTT
 - [x] Changer la commande "hold" qui est dépréciée
+- [x] Utilisation d'un login/mot de passe pour le broker MQTT
 - [ ] Attente du serveur MQTT si non disponible
 - [ ] Tester les paramètres et gestion d'erreur
-- [ ] Utilisation d'un login/mot de passe pour le broker MQTT

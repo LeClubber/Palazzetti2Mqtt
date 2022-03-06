@@ -14,6 +14,8 @@ class Palazzetti2Mqtt(Thread):
     def publish(topic, playload, retain=True):
         """ Publication des messages MQTT """
         client = mqtt.Client()
+        if Constantes.mqttUser:
+            client.username_pw_set(Constantes.mqttUser, Constantes.mqttPassword)
         client.connect(Constantes.mqttHost, Constantes.mqttPort, 60)
         client.publish(topic, playload, retain=retain)
         client.disconnect()
