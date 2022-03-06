@@ -136,6 +136,10 @@ Vous pourrez alors :
 - Avoir la température actuelle
 - Modifie la température cible
 
+## Bug connus
+- Le préréglage "Aucun" met la puissance à 1 (il n'existe pas de puissance 0 sur le Palazzetti)
+- La gestion des codes status de Palazzetti n'est pas assez fine, et il est impossible d'afficher une erreur en particulier dans Home-Assistant
+
 ## Todo list
 
 - [x] Refactoring en classe Python
@@ -143,7 +147,7 @@ Vous pourrez alors :
 - [x] Documentation
 - [x] Publier image Docker en multiple arch
 - [x] Discovery MQTT
-- [ ] Changer la commande "hold" qui est dépréciée
+- [x] Changer la commande "hold" qui est dépréciée
 - [ ] Attente du serveur MQTT si non disponible
 - [ ] Tester les paramètres et gestion d'erreur
 - [ ] Utilisation d'un login/mot de passe pour le broker MQTT

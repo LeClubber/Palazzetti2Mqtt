@@ -17,7 +17,7 @@ class Mqtt2Palazzetti(Thread):
         """ 
         Abonnement aux topics souhaités :
         - Mode
-        - Hold (puissance)
+        - Preset (puissance)
         - Temperature
         - Fan
         """
@@ -25,7 +25,7 @@ class Mqtt2Palazzetti(Thread):
         print(affichage)
         topic = Constantes.mqttTopic + '/climate/palazzetti/modeCmd'
         client.subscribe(topic)
-        topic = Constantes.mqttTopic + '/climate/palazzetti/holdCmd'
+        topic = Constantes.mqttTopic + '/climate/palazzetti/presetCmd'
         client.subscribe(topic)
         topic = Constantes.mqttTopic + '/climate/palazzetti/tempCmd'
         client.subscribe(topic)
@@ -44,8 +44,10 @@ class Mqtt2Palazzetti(Thread):
                 urlPalazzetti += "CMD+ON"
             else:
                 urlPalazzetti += "CMD+OFF"
-        elif topic.find("hold") != -1 :
+        elif topic.find("preset") != -1 :
             # Gestion de la puissance
+            if "none" == payload.lower():
+                payload = "1"
             urlPalazzetti += "SET+POWR+" + payload
         elif topic.find("temp") != -1 :
             # Gestion de la température de consigne

@@ -27,9 +27,9 @@ class Palazzetti2Mqtt(Thread):
         payload += '"mode_command_topic":"' + Constantes.mqttTopic + '/climate/palazzetti/modeCmd",'
         payload += '"mode_state_topic":"' + Constantes.mqttTopic + '/climate/palazzetti/state",'
         payload += '"mode_state_template":"{{ value_json.mode}}",'
-        payload += '"hold_command_topic":"' + Constantes.mqttTopic + '/climate/palazzetti/holdCmd",'
-        payload += '"hold_state_topic":"' + Constantes.mqttTopic + '/climate/palazzetti/state",'
-        payload += '"hold_state_template":"{{ value_json.hold}}",'
+        payload += '"preset_mode_command_topic":"' + Constantes.mqttTopic + '/climate/palazzetti/presetCmd",'
+        payload += '"preset_mode_state_topic":"' + Constantes.mqttTopic + '/climate/palazzetti/state",'
+        payload += '"preset_mode_value_template":"{{ value_json.preset}}",'
         payload += '"temperature_command_topic":"' + Constantes.mqttTopic + '/climate/palazzetti/tempCmd",'
         payload += '"temperature_state_topic":"' + Constantes.mqttTopic + '/climate/palazzetti/state",'
         payload += '"temperature_state_template":"{{ value_json.target_temp}}",'
@@ -43,7 +43,7 @@ class Palazzetti2Mqtt(Thread):
         payload += '"min_temp":"18",'
         payload += '"max_temp":"28",'
         payload += '"modes":["off", "heat"],'
-        payload += '"hold_modes":["1", "2", "3", "4", "5"],'
+        payload += '"preset_modes":["1", "2", "3", "4", "5"],'
         payload += '"fan_modes":["Off", "1", "2", "3", "4", "5", "High", "Auto"]'
         payload += '}'
         Palazzetti2Mqtt.publish(topic, payload)
@@ -65,7 +65,7 @@ class Palazzetti2Mqtt(Thread):
         # Temp set
         payload += '"target_temp":"' + str(jsonStatus['DATA']['SETP']) + '.0",'
         # Power
-        payload += '"hold":"' + str(jsonStatus['DATA']['PWR']) + '",'
+        payload += '"preset":"' + str(jsonStatus['DATA']['PWR']) + '",'
 
         # Fan
         fanState = str(jsonStatus['DATA']['F2L'])
